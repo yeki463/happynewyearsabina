@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Конец года</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #4da0d8;
+  font-family: "Georgia", serif;
+  overflow: hidden;
+}
+
+/* Snow */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Sections */
+.section {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.6s ease;
+}
+
+.section.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Text */
+h1 {
+  font-family: "Brush Script MT", cursive;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+p {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.85;
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(77,160,216,0.4);
+  margin: 30px 0;
+}
+
+.footer {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* Button */
+button {
+  margin-top: 40px;
+  background: transparent;
+  color: rgba(77,160,216,0.7);
+  border: 1px solid rgba(77,160,216,0.4);
+  padding: 10px 26px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+button:hover {
+  color: #4da0d8;
+  border-color: #4da0d8;
+}
+
+/* Page indicator */
+.page {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* Bell */
+.bell {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 25px;
+  position: relative;
+  opacity: 0.7;
+}
+
+.bell img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: bellFrame 1.6s infinite;
+}
+
+.bell img:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+@keyframes bellFrame {
+  0% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Images */
+.letter img {
+  max-width: 90%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+/* Decorations */
+.star {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.tree {
+  position: fixed;
+  bottom: 30px;
+  left: 40px;
+  opacity: 0.6;
+  z-index: 2;
+}
+/* Navigation arrows */
+.nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: rgba(77,160,216,0.45);
+  cursor: pointer;
+  user-select: none;
+  z-index: 3;
+  padding: 20px;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.nav:hover {
+  color: #4da0d8;
+}
+
+.nav.prev {
+  left: 10px;
+}
+
+.nav.next {
+  right: 10px;
+}
+
+.nav.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<div class="nav prev" onclick="goPrev()">&#8249;</div>
+<div class="nav next" onclick="goNext()">&#8250;</div>
+<body>
+
+<canvas id="snow"></canvas>
+<div class="star">⭐️</div>
+<div class="tree">🟦</div>
+
+<!-- SECTION 1 -->
+<div class="section active">
+  <div class="bell">
+    <img src="https://i.ibb.co/j93nVsYV/IMG-0914.png">
+    <img src="https://i.ibb.co/Q77PPhJL/IMG-0913.png">
+  </div>
+
+  <h1>конец года</h1>
+  <div class="divider"></div>
+
+  <p>
+    этот год был длинным.<br>
+    не по календарю. внутри.<br><br>
+    я отпускаю его позади.<br>
+со всем, что болело и оставляло шрамы.<br>
+    со всем, что научило молчать и быть терпеливее всех.
+  </p>
+
+  <div class="footer">
+    с новым годом, Сабина.<br>31 декабря
+  </div>
+
+  <div class="page">1 / 5</div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section letter">
+  <div class="bell">
+    <img src="https://i.ibb.co/j93nVsYV/IMG-0914.png">
+    <img src="https://i.ibb.co/Q77PPhJL/IMG-0913.png">
+  </div>
+  <img src="letter1.jpg">
+  <div class="page">2 / 5</div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section letter">
+  <div class="bell">
+    <img src="https://i.ibb.co/j93nVsYV/IMG-0914.png">
+    <img src="https://i.ibb.co/Q77PPhJL/IMG-0913.png">
+  </div>
+  <img src="letter2.jpg">
+  <div class="page">3 / 5</div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section letter">
+  <div class="bell">
+    <img src="https://i.ibb.co/j93nVsYV/IMG-0914.png">
+    <img src="https://i.ibb.co/Q77PPhJL/IMG-0913.png">
+  </div>
+  <img src="letter3.jpg">
+  <div class="page">4 / 5</div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section letter">
+  <div class="bell">
+    <img src="https://i.ibb.co/j93nVsYV/IMG-0914.png">
+    <img src="https://i.ibb.co/Q77PPhJL/IMG-0913.png">
+  </div>
+  <img src="art.jpg">
+  <div class="page">5 / 5</div>
+</div>
+
+<script>
+const sections = document.querySelectorAll(".section");
+const prevArrow = document.querySelector(".prev");
+const nextArrow = document.querySelector(".next");
+
+let current = 0;
+
+function showSection(index) {
+  sections.forEach(s => s.classList.remove("active"));
+  sections[index].classList.add("active");
+
+  prevArrow.classList.toggle("hidden", index === 0);
+  nextArrow.classList.toggle("hidden", index === sections.length - 1);
+}
+
+function goNext() {
+  if (current < sections.length - 1) {
+    current++;
+    showSection(current);
+  }
+}
+
+function goPrev() {
+  if (current > 0) {
+    current--;
+    showSection(current);
+  }
+}
+
+/* клавиатура (по желанию) */
+addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") goNext();
+  if (e.key === "ArrowLeft") goPrev();
+});
+
+/* старт */
+showSection(current);
+/* Snow */
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+let w = canvas.width = innerWidth;
+let h = canvas.height = innerHeight;
+
+const flakes = Array.from({length:120}, () => ({
+  x: Math.random()*w,
+  y: Math.random()*h,
+  r: Math.random()*2+1,
+  d: Math.random()+0.5
+}));
+
+let angle = 0;
+function drawSnow() {
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="rgba(255,255,255,0.8)";
+  ctx.beginPath();
+  flakes.forEach(f=>{
+    ctx.moveTo(f.x,f.y);
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    f.y+=f.d;
+    f.x+=Math.sin(angle)*0.4;
+    if(f.y>h){f.y=0;f.x=Math.random()*w;}
+  });
+  ctx.fill();
+  angle+=0.01;
+  requestAnimationFrame(drawSnow);
+}
+drawSnow();
+</script>
+
+</body>
+</html>
